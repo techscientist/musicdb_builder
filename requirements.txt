@@ -1,0 +1,6 @@
+# for rukkus
+
+requests
+sqlalchemy
+mysql-python
+cssselect
