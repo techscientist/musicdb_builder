@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Report</title>
+</head>
+<body>
+<h3>Graphline View</h3>
+{% load dict_filter %}
+<div>
+
+    {% for year in stats %}
+        <table style="float: left;width: 250px">
+        <tr><td colspan="2"><h1>{{ year }}</h1></td></tr>
+        {% for term in stats|hash:year|dictsortreversed:"count"|slice:":10" %}
+            <tr><td>{{ term.term }}</td><td>{{ term.count }}</td></tr>
+        {% endfor %}
+        </table>
+    {% endfor %}
+
+</div>
+
+
+
+
+
+</table>
+
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>Arist View</h3>
+<h1>{{ artist.title }} <small>rank #{{ artist.rank }}</small></h1>
+
+{{ artist }}
+
+<h3>Albums</h3>
+{% for album in artist.albums.all %}
+    {{ album.title }}<br>
+{% endfor %}
+
+<h3>Songs</h3>
+<table>
+
+    <td>Song Title</td>
+    <td>Year Released</td>
+    <td>Keyword Count</td>
+    <td>Top Keywords Used</td>
+
+{% for album in artist.albums.all %}
+    {% for song in album.songs.all %}
+        <tr style="background:#33{{ album.year }};color:#ffffff">
+            <td>{{ song.title }}</td>
+            <td>{{ album.year }}</td>
+            <td>{{ song.keywords.all.count }} words</td>
+            <td>
+{% for keyword in song.keywords.all|dictsortreversed:"appearances"|slice:":10" %}
+    <div style="float: left;width: 100px;border: solid 1px #009999;padding:5px;margin:2px">{{ keyword.term }} <span style="font-weight: bold">{{ keyword.appearances }}</span></div>
+
+{% endfor %}
+            </td>
+        </tr>
+    {% endfor %}
+{% endfor %}
+
+</table>
+</body>
+</html>
